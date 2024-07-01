@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Dating Matches Prediction</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+        form{
+            padding: 0px
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #555;
+            width: 100%;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        .radio-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .radio-group label {
+            margin: 20px;
+        }
+        .half-width {
+            width: 48%;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Online Dating Matches Prediction</h1>
+    <div class="container">
+        <form action = '/predict' method='POST'>
+            <label>Gender</label>
+            <div class="radio-group half-width">
+            <label><input type="radio" name="gender" value=0> Male</label>
+            <label><input type="radio" name="gender" value=1> Female</label>
+            </div>
+
+            <label>Have purchased VIP?</label>
+            <div class="radio-group half-width">
+                <label><input type="radio" name="vip" value=1> Yes</label>
+                <label><input type="radio" name="vip" value=0> No</label>
+            </div>
+
+            <label>Annual Income (USD)</label>
+            <input type="number" name="income" class="half-width" min=0 max=100000 value="{{ request.form.income if request.form else '' }}" required>
+
+            <label>Number of children</label>
+            <input type="number" name="children" class="half-width" min=0 max=10 value="{{ request.form.children if request.form else '' }}" required>
+
+            <label>What's your age?</label>
+            <input type="number" name="age" class="half-width" min=18 max=50 value="{{ request.form.age if request.form else '' }}" required>
+
+            <label>Subjective rating of attractiveness (1-10)</label>
+            <input type="number" name="rating" class="half-width" min="1" max="10" value="{{ request.form.rating if request.form else '' }}" required>
+
+            <button type="submit">Estimate</button>
+        </form>
+    </div>
+    <h3> {{ text }}</h3> 
+</body>
+</html>
